@@ -6,15 +6,19 @@ URL = 'https://programmer100.pythonanywhere.com/tours/'
 
 if __name__ == '__main__':
     while True:
-        scraped = scrape(URL)
-        extracted = extract(scraped)
-        print(extracted)
+        event = Event()
+        scraped = event.scrape(URL)
+        extracted = event.extract(scraped)
+
         # Add like file
 
         if extracted != "No upcoming tours":  # If tour is exist
-            row = read(extracted)
+            database = Database()
+            row = database.read(extracted)
+            print(extracted)
             if not row:  # If tour is not on data.txt file
-                store(extracted)  # Add tour to data.txt file
-                send_email()
+                database.store(extracted)  # Add tour to data.txt file
+                email = Email()
+                email.send()
         time.sleep(2)
 
