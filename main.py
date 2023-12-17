@@ -1,4 +1,4 @@
-from functions import *
+from classes import *
 import time
 
 # Testing site url
